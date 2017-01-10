@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="ISO-8859-1">
+<title>Servicios Kunder</title>
+<script type="text/javascript" src="lib/jquery-3.1.1.min.js"></script>
+
+<script type="text/javascript">
+function mayusculasLargoCuatro(){
+	
+	var obj ={
+			data:null,
+			code: null,
+			description: null,											
+		};
+		obj.data = $('#palabra').val();	
+	$.ajax({
+		type : 'POST',
+		url: 'kunder/servicio/word',
+		headers : {
+			'Accept' : 'application/json',
+			'Content-Type' : 'application/json'
+		},
+		success : function(resp){
+			 $('#resultadoPalabra').val(resp.data);
+		}
+	});
+	}
+
+
+function horaUTCISODATE(){
+	var uri = $('#hora').val();
+	$.ajax({
+		type : 'GET',
+		url: 'kunder/servicio/time?value='+uri,
+		success : function(resp){
+			 $('#resultadoHora').val(resp.data);
+		}
+	});
+}
+
+</script>
+</head>
+<body>
+
+<form action="">
+
+<br />
+<h2>Palabra en Mayúsculas largo 4</h2>
+
+<table>
+<tr>
+	<td><label>Palabra </label> </td>
+	<td><input type="text" id="palabra" placeholder="ingrese palabra"/></td>
+</tr>
+<tr>
+	<td></td>
+	<td><input type="button" value="Transformar palabra" onclick="mayusculasLargoCuatro()" /></td>
+</tr>
+<tr>
+	<td><label>Resultado: </label></td>
+	<td><input type="text" id="resultadoPalabra" /> </td>
+</tr>
+
+</table>
+
+
+<h2>Hora en formato UTC ISODATE</h2>
+
+<table>
+<tr>
+	<td><label>Hora </label> </td>
+	<td><input type="text" id="hora" placeholder="hh:mm:ss"/></td>
+</tr>
+<tr>
+	<td></td>
+	<td><input type="button" value="Hora en formato UTC ISODATE" onclick="horaUTCISODATE()" /></td>
+</tr>
+<tr>
+	<td><label>Resultado: </label></td>
+	<td><input type="text" id="resultadoHora" /> </td>
+</tr>
+
+</table>
+
+
+</form>
+
+</body>
+</html>
